@@ -1,3 +1,0 @@
-git add document.txt
-git commit -m "Add Text File [document.txt]"
-git push
