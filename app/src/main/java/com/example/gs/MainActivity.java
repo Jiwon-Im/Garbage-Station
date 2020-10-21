@@ -1,12 +1,9 @@
 package com.example.gs;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,15 +27,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
 
-    paymentBtn = (Button) findViewById(R.id.button1);
-    cancelBtn = (Button) findViewById(R.id.button2);
-
-        paymentBtn.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            Intent intent = new Intent(QrActivity.this, ResultActivity.class);
-            startActivity(intent);//화면전환
-        }
-    });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,10 +77,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
             }
         }
-    }
-
-    @Override
-    public void onClick(View view){
-
     }
 }
