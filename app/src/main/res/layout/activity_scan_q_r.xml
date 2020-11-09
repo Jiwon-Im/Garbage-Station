@@ -6,59 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".QrActivity">
 
+
     <TextView
         android:id="@+id/gv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gvalue"
+        android:gravity="center"
         android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/g"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/g"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toEndOf="@+id/topBar"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
-
-    <TextView
-        android:id="@+id/g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/g"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/gv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/wv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/wonvalue"
-        android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/won"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/won"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/won"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/won"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/wv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toTopOf="@+id/topBar"
+        app:layout_constraintVertical_bias="0.603" />
 
     <Button
         android:id="@+id/button1"
@@ -73,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.858" />
+        app:layout_constraintVertical_bias="0.84" />
 
     <Button
         android:id="@+id/button2"
@@ -120,11 +80,11 @@
             android:layout_width="35dp"
             android:layout_height="40dp"
             android:layout_gravity="start"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="6dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:src="@drawable/menu"
-            android:layout_marginLeft="15dp" />
+            android:src="@drawable/menu" />
 
         <TextView
             android:id="@+id/topBarTitle"
@@ -136,6 +96,8 @@
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold" />
+
     </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
