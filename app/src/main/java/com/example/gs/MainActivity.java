@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         locationSource =
                 new FusedLocationSource(this,LOCATION_PERMISSION_REQUEST_CODE);

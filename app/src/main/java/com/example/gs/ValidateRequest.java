@@ -9,14 +9,14 @@ import java.util.Map;
 
 public class ValidateRequest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="http://gs2020.dothome.co.kr/UserValidate.php";
-    private Map<String,String> map;
+    final static private String URL = "http://gs2020.dothome.co.kr/UserValidate.php";
+    private Map<String, String> map;
 
-    public ValidateRequest(String userID, Response.Listener<String>listener){
-        super(Method.POST,URL,listener,null);
+    public ValidateRequest(String UserEmail, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
 
-        map=new HashMap<>();
-        map.put("userID",userID);
+        map = new HashMap<>();
+        map.put("UserEmail", UserEmail);
     }
 
     @Override
