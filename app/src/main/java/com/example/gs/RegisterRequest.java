@@ -9,24 +9,22 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
 
-    //서버 url 설정(php파일 연동)
-    final static  private String URL="http://gs2020.dothome.co.kr/Register2.php";
-    private Map<String,String>map;
+    //서버 URL 설정(php 파일 연동)
+    final static private String URL = "http://gs2020.dothome.co.kr/Register2.php";
+    private Map<String, String> map;
+    //private Map<String, String>parameters;
 
-    public RegisterRequest(String userID, String userPassword, String userName, int userAge, int userHak, String userMajor, Response.Listener<String>listener){
-        super(Method.POST,URL,listener,null);//위 url에 post방식으로 값을 전송
+    public RegisterRequest(String UserEmail, String UserPwd, String UserName,Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
 
-        map=new HashMap<>();
-        map.put("userID",userID);
-        map.put("userPassword",userPassword);
-        map.put("userName",userName);
-        map.put("userAge",userAge+"");
-        map.put("userHak",userHak+"");
-        map.put("userMajor",userMajor);
+        map = new HashMap<>();
+        map.put("UserEmail", UserEmail);
+        map.put("UserPwd", UserPwd);
+        map.put("UserName", UserName);
     }
 
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
+    protected Map<String, String>getParams() throws AuthFailureError {
         return map;
     }
 }
