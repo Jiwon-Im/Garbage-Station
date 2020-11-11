@@ -1,11 +1,11 @@
 
 package com.example.gs;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -36,7 +36,7 @@ public class ScannerActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(ScannerActivity.this, ScannerActivity.class);//여기서 scanQR로 이동
+                Intent intent = new Intent(ScannerActivity.this, QrActivity.class);//여기서 scanQR로 이동
                 intent.putExtra("qrcode",result.getContents());//name은 받기위한 tag정도일 뿐 중요치x, 전달데이터
 
                 startActivity(intent);//이제 이동

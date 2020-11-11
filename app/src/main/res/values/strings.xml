@@ -4,7 +4,7 @@
     <string name="use">GS 이용</string>
 
     <string name="gvalue"><u>&#160;&#160;&#160;00&#160;&#160;&#160;</u></string>
-    <string name="g">&#160;g/부피&#160;</string>
+    <string name="g">&#160;g&#160;</string>
     <string name="wonvalue"><u>&#160;&#160;&#160;00&#160;&#160;&#160;</u></string>
     <string name="won">&#160;&#160;&#160;&#160;&#160;원&#160;&#160;&#160;&#160;&#160;</string>
     <string name="finish">____원 결제하기</string>
