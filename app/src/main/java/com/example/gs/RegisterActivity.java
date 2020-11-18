@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (success) {
 
                                     Toast.makeText(getApplicationContext(), String.format("%s님 가입을 환영합니다.", UserName), Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(RegisterActivity.this, CardRegister.class);
                                     startActivity(intent);
 
                                     //회원가입 실패시
