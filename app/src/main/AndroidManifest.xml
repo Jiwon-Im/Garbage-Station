@@ -5,19 +5,18 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,27 +24,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CaptureFormActivity"></activity>
-        <activity android:name=".ScannerActivity">
-        </activity>
-        <activity android:name=".QrActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".LoginActivity">
 
-        </activity>
-
-        <activity android:name=".testActivity"></activity>
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".CaptureFormActivity" />
+        <activity android:name=".ScannerActivity" />
+        <activity android:name=".QrActivity" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".CardRegisterActivity">
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".ResultActivity" /></activity>
+        <activity android:name=".GsPayActivity"></activity>
 
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="cu6l4huj64" />
     </application>
-
 
 </manifest>

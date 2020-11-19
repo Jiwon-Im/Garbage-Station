@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="255dp"
                 android:layout_marginLeft="353dp"/>
+
         </FrameLayout>
 
         <LinearLayout
@@ -102,18 +103,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="[ 이용 안내 ]"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:text="[ GS 이용 ]"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp" />
-        <TextView
+            android:textSize="25dp"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:background="@drawable/listview_border"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="GS 이용을 위해서는 원하는 GS를 찾은 뒤 "
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:paddingBottom="20dp"
+            android:divider="#00000000">
+        </ListView>
+
     </LinearLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
