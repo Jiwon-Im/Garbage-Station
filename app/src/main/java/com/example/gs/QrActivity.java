@@ -29,7 +29,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class QrActivity extends AppCompatActivity {
 
     private double num = -1;
@@ -87,7 +86,6 @@ public class QrActivity extends AppCompatActivity {
                     findGs(gsBins);
 
                 }
-
             }
 
             @Override
@@ -140,10 +138,6 @@ public class QrActivity extends AppCompatActivity {
             }
         });
 
-/*
-        Toast.makeText(this,gsBins.indexOf())
-*/
-
     }
 
     private void findGs(List<GsBin> gsBins) {
@@ -160,8 +154,8 @@ public class QrActivity extends AppCompatActivity {
 
             }
         }
-
     }
+
 
     private boolean isConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -187,13 +181,13 @@ public class QrActivity extends AppCompatActivity {
 
                 String read = input.readLine();
 
-                weight = Integer.parseInt(read);
-
+//                weight = Integer.parseInt(read);
                 mHandler.post(new msgUpdate(read));
 
                 Thread.sleep(2000);
 
                 mHandler.post(new msgUpdate(read));
+
                 socket.close();
                 throw new Exception();
             } catch (Exception e) {

@@ -5,29 +5,33 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class GsBin {
 
-    public double capacity;
     public int id;
+    public String size;
     public double lat;
     public double lng;
-    public String size;
+    public double capacity;
     public String url;
 
     public GsBin(){}
 
     public int getGsId(){
-        return id;
+        return this.id;
+    }
+
+    public String getUrl(){
+        return this.url;
+    }
+
+    public double getLat() {
+        return this.lat;
+    }
+
+    public double getLng() {
+        return this.lng;
     }
 
     public double getGsCapacity(){
         return capacity;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLng() {
-        return lng;
     }
 
     public void setCapacity(double capacity) {

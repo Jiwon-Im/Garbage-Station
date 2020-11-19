@@ -26,22 +26,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CaptureFormActivity"></activity>
-        <activity android:name=".ScannerActivity"></activity>
-        <activity android:name=".QrActivity"></activity>
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".CaptureFormActivity" />
+        <activity android:name=".ScannerActivity" />
+        <activity android:name=".QrActivity" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".CardRegisterActivity"></activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity android:name=".ResultActivity"></activity>
         <activity android:name=".GsPayActivity"></activity>
-        <activity android:name=".CardRegisterActivity"></activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="cu6l4huj64" />
     </application>
-
 
 </manifest>
