@@ -1,5 +1,6 @@
 package com.example.gs;
 
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,10 +46,10 @@ public class SignUpActivity extends AppCompatActivity {
         System.exit(1);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener(){
+    View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.signUpButton:
                     signUp();
                     break;
@@ -57,15 +58,13 @@ public class SignUpActivity extends AppCompatActivity {
     };
 
 
-    private void signUp(){
-        String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText)findViewById(R.id.passwordEditText)).getText().toString();
-        String passwordCheck = ((EditText)findViewById(R.id.passwordCkEditText)).getText().toString();
+    private void signUp() {
+        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+        String passwordCheck = ((EditText) findViewById(R.id.passwordCkEditText)).getText().toString();
 
-        if(email.length() > 0 && password.length() > 0 && passwordCheck.length() >0)
-        {
-            if(password.endsWith(passwordCheck))
-            {
+        if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
+            if (password.endsWith(passwordCheck)) {
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -77,8 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     startToast("회원가입에 성공하였습니다.");
                                     //성공했을 때 UI logic
                                 } else {
-                                    if(task.getException() != null)
-                                    {
+                                    if (task.getException() != null) {
                                         startToast(task.getException().toString());
 
                                     }
@@ -90,18 +88,16 @@ public class SignUpActivity extends AppCompatActivity {
 
                             }
                         });
-            }
-            else {
+            } else {
                 startToast("비밀번호가 일치하지 않습니다.");
             }
-        }else{
+        } else {
             startToast("이메일 또는 비밀번호를 입력해 주세요. ");
         }
 
     }
 
-    private void startToast(String msg)
-    {
+    private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
