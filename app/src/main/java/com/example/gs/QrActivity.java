@@ -47,10 +47,10 @@ public class QrActivity extends AppCompatActivity {
     TextView idid;
     private List<GsBin> gsBins = new ArrayList<>();
 
-    private String ip = "192.168.237.1";
+    private String ip = "222.104.211.22";
     //private String ip = "10.0.2.2";
 
-    private int port = 9003;
+    private int port = 9997;
 
     @Override
     protected void onStop() {

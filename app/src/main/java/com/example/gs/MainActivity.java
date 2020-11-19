@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
     private static final String TAG = "MainActivity";
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
-    private static final String[] PERMISSIONS = {
+    private static  final String[] PERMISSIONS = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CardRegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
                 startActivity(intent);
             }
         });
