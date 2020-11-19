@@ -113,12 +113,12 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),QrActivity.class);
+                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
                 startActivity(intent);
             }
         });
 
-        //로그인 화면 연결
+        //로그아웃
         ImageButton mBtn = (ImageButton) findViewById(R.id.menuImg);
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override

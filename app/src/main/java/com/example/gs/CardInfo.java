@@ -7,12 +7,14 @@ public class CardInfo {
     private String MmYy;
     private String CardPass;
     private String BirDate;
+    private int money;
 
-    public CardInfo(String CardNum, String MmYy, String CardPass, String BirDate){
+    public CardInfo(String CardNum, String MmYy, String CardPass, String BirDate, Integer money){
         this.CardNum = CardNum;
         this.MmYy = MmYy;
         this.CardPass = CardPass;
         this.BirDate = BirDate;
+        this.money = money;
     }
 
     public String getCardNum(){

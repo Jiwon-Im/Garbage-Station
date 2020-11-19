@@ -26,16 +26,16 @@
         </activity>
 
         <activity android:name=".SignUpActivity"/>
-<!--        <activity android:name=".CaptureFormActivity" />-->
-<!--        <activity android:name=".ScannerActivity" />-->
+        <activity android:name=".CaptureFormActivity" />
+        <activity android:name=".ScannerActivity" />
         <activity android:name=".QrActivity" />
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".CardRegisterActivity"></activity>
-<!--        <activity-->
-<!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
-<!--            android:screenOrientation="fullSensor"-->
-<!--            tools:replace="screenOrientation" />-->
-<!--        <activity android:name=".ResultActivity" /></activity>-->
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+        <activity android:name=".ResultActivity" /></activity>
         <activity android:name=".GsPayActivity"></activity>
 
         <meta-data
