@@ -1,6 +1,7 @@
 package com.example.gs;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -70,10 +71,10 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    //Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("회원가입에 성공하였습니다.");
+                                    Intent intent = new Intent(getApplicationContext(), CardRegisterActivity.class);
+                                    startActivity(intent);
                                     //성공했을 때 UI logic
                                 } else {
                                     if (task.getException() != null) {

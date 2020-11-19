@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,13 +30,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         firebaseAuth =  FirebaseAuth.getInstance();
+
         //버튼 등록하기
         mResigettxt = findViewById(R.id.logregbutton);
         mLoginBtn = findViewById(R.id.login_button);
-        mEmailText = findViewById(R.id.emailEditText);
-        mPasswordText = findViewById(R.id.passwordEditText);
+        mEmailText = findViewById(R.id.login_email);
+        mPasswordText = findViewById(R.id.login_password);
 
 
         //가입 버튼이 눌리면
@@ -54,13 +55,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String email = mEmailText.getText().toString().trim();
-                String pwd = mPasswordText.getText().toString().trim();
+                String email = mEmailText.getText().toString();
+                String pwd = mPasswordText.getText().toString();
+
                 firebaseAuth.signInWithEmailAndPassword(email,pwd)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startToast("로그인에 성공하였습니다.");
                                     startActivity(intent);
