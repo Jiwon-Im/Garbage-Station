@@ -38,6 +38,8 @@
         android:id="@+id/button1"
         android:layout_width="350dp"
         android:layout_height="55dp"
+        android:background="@drawable/use_button"
+
         android:gravity="center"
         android:text="@string/finish"
         android:textColor="#FFFFFF"
@@ -53,6 +55,7 @@
         android:id="@+id/button2"
         android:layout_width="350dp"
         android:layout_height="55dp"
+        android:background="@drawable/use_button"
         android:text="@string/cancel"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -73,7 +76,9 @@
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.187" />
+        app:layout_constraintVertical_bias="0.187"
+        app:srcCompat="@drawable/dump" />
+
 
     <FrameLayout
 
