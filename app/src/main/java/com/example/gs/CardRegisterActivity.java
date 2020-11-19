@@ -50,13 +50,14 @@ public class CardRegisterActivity extends AppCompatActivity {
         final String MmYy = ((EditText) findViewById(R.id.Mm_Yy)).getText().toString();
         final String CardPass = ((EditText) findViewById(R.id.Card_Pass)).getText().toString();
         final String BirDate = ((EditText) findViewById(R.id.Bir_Date)).getText().toString();
+        final Number GsPay = 10000;
 
         if (CardNum.length() > 15 && MmYy.length() > 3 && CardPass.length() > 1 && BirDate.length() > 7) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate,10000);
+            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate, GsPay);
 
             if (user != null) {
                 db.collection("users").document(user.getUid()).set(cardInfo)
@@ -115,4 +116,3 @@ public class CardRegisterActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
-
