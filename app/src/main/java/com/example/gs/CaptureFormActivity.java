@@ -45,7 +45,7 @@ public class CaptureFormActivity extends CaptureActivity {
         imageView.setScaleType(ImageView.ScaleType.MATRIX);
 
 
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.trashcan));
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.trashcan2));
 
         Display display = getWindowManager().getDefaultDisplay();  // in Activity
 
@@ -56,7 +56,7 @@ public class CaptureFormActivity extends CaptureActivity {
 
         Matrix matrix=new Matrix();
         matrix.set(imageView.getImageMatrix());
-        matrix.postScale(0.18f,0.18f,(float)((float)width-(float)576*0.09),(float)((float)height-(float)720*0.09));//화면크기 받아와서 조절하기!
+        matrix.postScale(0.25f,0.25f,(float)((float)width-(float)576*0.09),(float)((float)height-(float)720*0.09));//화면크기 받아와서 조절하기!
         imageView.setImageMatrix(matrix);
 
         /* this.addContentView ! */

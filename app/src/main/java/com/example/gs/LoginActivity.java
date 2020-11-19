@@ -2,6 +2,7 @@ package com.example.gs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 String email = mEmailText.getText().toString();
                 String pwd = mPasswordText.getText().toString();
 
@@ -63,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
+
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startToast("로그인에 성공하였습니다.");

@@ -23,6 +23,10 @@ public class ScannerActivity extends AppCompatActivity {
         qrScan.setCaptureActivity(CaptureFormActivity.class);
         qrScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
         qrScan.setPrompt("QR코드에 묻은 먼지 닦고 사용해주세요");
+/*
+        qrScan.set
+*/
+
         qrScan.initiateScan();
 
     }
@@ -34,10 +38,12 @@ public class ScannerActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 // todo
             } else {
+/*
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+*/
 
-                Intent intent = new Intent(ScannerActivity.this, QrActivity.class);//여기서 scanQR로 이동
-                intent.putExtra("qrcode",result.getContents());//name은 받기위한 tag정도일 뿐 중요치x, 전달데이터
+                Intent intent = new Intent(ScannerActivity.this, QrActivity.class);
+                intent.putExtra("code",result.getContents());
 
                 startActivity(intent);//이제 이동
                 // todo

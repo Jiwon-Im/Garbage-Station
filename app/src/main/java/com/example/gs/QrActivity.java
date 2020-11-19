@@ -29,26 +29,27 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class QrActivity extends AppCompatActivity {
 
-    private int num;
+    private double num = -1;
+    //private int num = -1;
+    private int weight=-1;
+
     private Button paymentBtn;
     private Button cancelBtn;
 
     private Handler mHandler;
     private Socket socket;
 
-    private String code;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-    TextView msgTV;
-    TextView idid;
     private List<GsBin> gsBins = new ArrayList<>();
 
-    private String ip = "222.104.211.22";
-    //private String ip = "10.0.2.2";
+    private String qrurl;
+    //private String ip = "192.168.1.5";
+    private String ip = "10.0.2.2";
+    TextView msgTV, trashbinid;
 
     private int port = 9997;
 
@@ -67,8 +68,9 @@ public class QrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_q_r);
 
-        Intent intent = getIntent();
-        code = intent.getExtras().getString("code");
+    /*    Intent intent = getIntent();
+        qrurl = intent.getExtras().getString("code");*/
+        qrurl = "http://m.site.naver.com/0HELu";
 
         //파이어베이스 데이터베이스
         firebaseDatabase = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
@@ -82,6 +84,7 @@ public class QrActivity extends AppCompatActivity {
                     GsBin gsBin = snapshot.getValue(GsBin.class); //만들어둔 GsBin 객체에 데이터 담기
                     gsBins.add(gsBin);
                     findGs(gsBins);
+
                 }
             }
 
@@ -93,7 +96,8 @@ public class QrActivity extends AppCompatActivity {
 
         mHandler = new Handler();
         msgTV = (TextView) findViewById(R.id.gv);
-        Toast.makeText(this, "wifi에 연결", Toast.LENGTH_SHORT).show();
+        trashbinid = (TextView) findViewById(R.id.idvalue);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -102,6 +106,7 @@ public class QrActivity extends AppCompatActivity {
         }
         switch (getNetworkType()) {
             case ConnectivityManager.TYPE_WIFI:
+                Toast.makeText(this, "WIFI", Toast.LENGTH_SHORT).show();
 
                 ConnectThread th = new ConnectThread();
                 th.start();
@@ -114,7 +119,9 @@ public class QrActivity extends AppCompatActivity {
                 break;
 
         }
-
+        if (weight>0) {
+            Toast.makeText(this, "weight=" + weight, Toast.LENGTH_SHORT).show();
+        }
         paymentBtn = (Button) findViewById(R.id.button1);
         cancelBtn = (Button) findViewById(R.id.button2);
 
@@ -130,20 +137,23 @@ public class QrActivity extends AppCompatActivity {
                 startActivity(intent2);//화면전환
             }
         });
-        //  String str = Integer.toString(num);
-        idid = (TextView) findViewById(R.id.idvalue);
-        idid.setText(String.valueOf(num));
+
     }
 
-
     private void findGs(List<GsBin> gsBins) {
-        for (GsBin gsbin : this.gsBins) {
-            if (code.equalsIgnoreCase(gsbin.url)) {
-                num = gsbin.getGsId();
-                break;
+        if (num < 0) {
+            for (GsBin gsbin : this.gsBins) {
+                if (qrurl.equalsIgnoreCase(gsbin.url)) {
+                    num = gsbin.getGsCapacity();
+                    break;
+                }
+            }
+            if (num > 0) {
+                double flag = num;
+                trashbinid.setText(String.valueOf(flag));
+
             }
         }
-
     }
 
 
@@ -153,7 +163,6 @@ public class QrActivity extends AppCompatActivity {
         boolean isConnected = activeNetWork != null && activeNetWork.isConnectedOrConnecting();
 
         return isConnected;
-
     }
 
     private int getNetworkType() {
@@ -161,8 +170,6 @@ public class QrActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         return activeNetwork.getType();
-
-
     }
 
     class ConnectThread extends Thread {
@@ -173,7 +180,9 @@ public class QrActivity extends AppCompatActivity {
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String read = input.readLine();
-                mHandler.post(new msgUpdate("0"));
+
+//                weight = Integer.parseInt(read);
+                mHandler.post(new msgUpdate(read));
 
                 Thread.sleep(2000);
 
@@ -201,6 +210,5 @@ public class QrActivity extends AppCompatActivity {
 
         }
     }
-
 
 }

@@ -4,6 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class GsBin {
+
     public int id;
     public String size;
     public double lat;
@@ -29,8 +30,11 @@ public class GsBin {
         return this.lng;
     }
 
+    public double getGsCapacity(){
+        return capacity;
+    }
+
     public void setCapacity(double capacity) {
         this.capacity = capacity;
     }
 }
-
