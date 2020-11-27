@@ -65,4 +65,3 @@ public class CaptureFormActivity extends CaptureActivity {
         this.addContentView(imageView,params);
     }
 }
-

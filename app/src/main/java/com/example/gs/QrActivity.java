@@ -54,16 +54,16 @@ public class QrActivity extends AppCompatActivity {
     private List<GsBin> gsBins = new ArrayList<>();
 
     private String qrurl;
-    private String ip = "192.168.1.5";  //samsung
+    //private String ip = "192.168.1.5";  //samsung
     // private String ip = "10.0.2.2";  //pixel
-    // private String ip = "192.168.237.1";  //jw
+     private String ip = "192.168.222.1";  //hj
     // private String ip = "192.168.1.1";   //nr
 
     checkedBin chBin1 = new checkedBin();
     ConnectThread th;
     TextView msgTV, trashbinid;
 
-    private int port = 9995;
+    private int port = 9988;
 
     @Override
     protected void onStop() {
@@ -266,5 +266,4 @@ public class QrActivity extends AppCompatActivity {
         public String key;
     }
 }
-
 
