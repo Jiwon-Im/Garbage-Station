@@ -7,7 +7,7 @@
     tools:context=".ResultActivity">
 
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/gv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="0.728" />-->
     <FrameLayout
 
         android:id="@+id/topBar"
