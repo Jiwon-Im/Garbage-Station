@@ -51,13 +51,13 @@ public class CardRegisterActivity extends AppCompatActivity {
         final String CardPass = ((EditText) findViewById(R.id.Card_Pass)).getText().toString();
         final String BirDate = ((EditText) findViewById(R.id.Bir_Date)).getText().toString();
         final Number GsPay = 10000;
-
+        final String UId;
         if (CardNum.length() > 15 && MmYy.length() > 3 && CardPass.length() > 1 && BirDate.length() > 7) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate, GsPay);
+            UId = user.getUid();
+            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate, GsPay, UId);
 
             if (user != null) {
                 db.collection("users").document(user.getUid()).set(cardInfo)
