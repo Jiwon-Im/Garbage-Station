@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     GsBin gsBin = snapshot.getValue(GsBin.class); //만들어둔 GsBin 객체에 데이터 담기
                     gsBins.add(gsBin);
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
+                Intent intent = new Intent(getApplicationContext(),QrActivity.class);
                 startActivity(intent);
             }
         });
@@ -169,11 +169,6 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
 
 
     }
-    /*private void startSignUpActivity()
-    {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }*/
 
 
     @Override
@@ -232,21 +227,62 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
             Marker marker = new Marker();
             marker.setTag(gsbin);
             marker.setPosition(new LatLng(gsbin.lat, gsbin.lng));
-            if (30000 <= (gsbin.capacity)) {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
-                marker.setWidth(100);
-                marker.setHeight(100);
-            } else if (15000 <= (gsbin.capacity)) {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
-                marker.setWidth(100);
-                marker.setHeight(100);
-            } else {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
+            switch (gsbin.size){
+                case "S":
+                    if (20000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.greengs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else if (10000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.yellowgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.redgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    }marker.setAnchor(new PointF(0.5f, 1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                    break;
+                case "M":
+                    if (35000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.greengs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else if (15000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.yellowgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.redgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    }marker.setAnchor(new PointF(0.5f, 1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                    break;
+                case "L":
+                    if (60000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.greengs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else if (30000 <= (gsbin.capacity)) {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.yellowgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    } else {
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.redgs));
+                        marker.setWidth(150);
+                        marker.setHeight(150);
+                    }marker.setAnchor(new PointF(0.5f, 1.0f));
+                    marker.setMap(naverMap);
+                    marker.setOnClickListener(this);
+                    markerList.add(marker);
+                    break;
             }
-            marker.setAnchor(new PointF(0.5f, 1.0f));
-            marker.setMap(naverMap);
-            marker.setOnClickListener(this);
-            markerList.add(marker);
         }
     }
 

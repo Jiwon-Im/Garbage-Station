@@ -7,14 +7,16 @@ public class CardInfo {
     private String MmYy;
     private String CardPass;
     private String BirDate;
-    private int money;
+    private Number GsPay;
+    private String uid;
 
-    public CardInfo(String CardNum, String MmYy, String CardPass, String BirDate, Integer money){
+    public CardInfo(String CardNum, String MmYy, String CardPass, String BirDate, Number GsPay, String uid){
         this.CardNum = CardNum;
         this.MmYy = MmYy;
         this.CardPass = CardPass;
         this.BirDate = BirDate;
-        this.money = money;
+        this.GsPay = GsPay;
+        this.uid=uid;
     }
 
     public String getCardNum(){
@@ -41,8 +43,12 @@ public class CardInfo {
     public String getBirDate(){
         return this.BirDate;
     }
-    public void setBirDate(String BirDate){
-        this.BirDate = BirDate;
-    }
+    public void setBirDate(String BirDate){ this.BirDate = BirDate;  }
+
+    public Number getGsPay(){ return this.GsPay; }
+    public void setGsPay(Number GsPay){ this.GsPay = GsPay; }
+
+    public String getuid(){  return this.uid; }
+    public void setUId(String uid){ }
 
 }

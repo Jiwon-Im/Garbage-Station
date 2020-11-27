@@ -50,13 +50,16 @@ public class CardRegisterActivity extends AppCompatActivity {
         final String MmYy = ((EditText) findViewById(R.id.Mm_Yy)).getText().toString();
         final String CardPass = ((EditText) findViewById(R.id.Card_Pass)).getText().toString();
         final String BirDate = ((EditText) findViewById(R.id.Bir_Date)).getText().toString();
+        final Number GsPay = 10000;
+        final String UId;
 
         if (CardNum.length() > 15 && MmYy.length() > 3 && CardPass.length() > 1 && BirDate.length() > 7) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate,10000);
+            UId=user.getUid();
+            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate, GsPay,UId);
 
             if (user != null) {
                 db.collection("users").document(user.getUid()).set(cardInfo)
@@ -82,37 +85,9 @@ public class CardRegisterActivity extends AppCompatActivity {
             dialog.show();
         }
 
-//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            DatabaseReference userbaseReference = FirebaseDatabase.getInstance().getReference();
-//            String userId = user.getUid();
-//            DatabaseReference adduserinfoReference = userbaseReference.child("userinfo").child(userId);
-
-//            ValueEventListener valueEventListener = new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate);
-//                    cardInfo = snapshot.getValue(CardInfo.class);
-//
-//                    Intent intent = new Intent(CardRegisterActivity.this, LoginActivity.class);
-//                    startToast("카드 등록에 성공하였습니다.");
-//                    startActivity(intent);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                    startToast("카드 등록 실패");
-//                }
-//            };
-//        } else {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(CardRegisterActivity.this);
-//            dialog = builder.setMessage("모두 입력해주세요.").setNegativeButton("확인", null).create();
-//            dialog.show();
-//        }
-//    }
     }
 
     private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
-
