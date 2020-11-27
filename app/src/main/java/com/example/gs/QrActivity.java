@@ -54,16 +54,16 @@ public class QrActivity extends AppCompatActivity {
     private List<GsBin> gsBins = new ArrayList<>();
 
     private String qrurl;
-    //private String ip = "192.168.1.5";  //samsung
+    private String ip = "192.168.1.5";  //samsung
     // private String ip = "10.0.2.2";  //pixel
-     private String ip = "192.168.222.1";  //hj
+    // private String ip = "192.168.222.1";  //hj
     // private String ip = "192.168.1.1";   //nr
 
     checkedBin chBin1 = new checkedBin();
     ConnectThread th;
     TextView msgTV, trashbinid;
 
-    private int port = 9988;
+    private int port = 9994;
 
     @Override
     protected void onStop() {
@@ -79,11 +79,10 @@ public class QrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_q_r);
+          Intent intent = getIntent();
+          qrurl = intent.getExtras().getString("code");
 
-        //  Intent intent = getIntent();
-        //  qrurl = intent.getExtras().getString("code");
-
-        qrurl = "http://m.site.naver.com/0HELu";
+      //  qrurl = "http://m.site.naver.com/0HELu";
 
 
         msgTV = (TextView) findViewById(R.id.gv);

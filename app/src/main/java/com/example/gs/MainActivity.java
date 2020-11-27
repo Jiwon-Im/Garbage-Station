@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),QrActivity.class);
+                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
                 startActivity(intent);
             }
         });
@@ -242,6 +242,8 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
                 marker.setHeight(150);
             } else {
                 marker.setIcon(OverlayImage.fromResource(R.drawable.redgs));
+                marker.setWidth(150);
+                marker.setHeight(150);
             }
             marker.setAnchor(new PointF(0.5f, 1.0f));
             marker.setMap(naverMap);
