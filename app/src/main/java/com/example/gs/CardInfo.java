@@ -20,9 +20,13 @@ public class CardInfo {
     }
 
     public String getCardNum(){
+
+
+
         return this.CardNum;
     }
     public void setCardNum(String CardNum){
+
         this.CardNum = CardNum;
     }
 
@@ -41,6 +45,7 @@ public class CardInfo {
     }
 
     public String getBirDate(){
+        //String[] array = BirDate.split(" ");
         return this.BirDate;
     }
     public void setBirDate(String BirDate){ this.BirDate = BirDate;  }

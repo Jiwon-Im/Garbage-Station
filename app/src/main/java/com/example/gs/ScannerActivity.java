@@ -1,4 +1,3 @@
-
 package com.example.gs;
 
 import android.content.Intent;
