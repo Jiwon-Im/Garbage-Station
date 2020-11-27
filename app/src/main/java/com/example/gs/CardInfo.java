@@ -24,19 +24,7 @@ public class CardInfo {
 
     public String getCardNum(){
 
-        String array = "";
-        String target = " ";
-        int target_num = array.indexOf(target);
 
-        for(int i =0;i<4;i++)
-        {
-           // toString().substring(3);
-            String[] result = CardNum.split(" ");
-
-            //result[i] = target.substring(target.length()-4, target.length());
-            String hap = target.substring(target_num,(target.substring(target_num).indexOf(" ")+ target_num));
-            result[i] = hap;
-        }
 
         return this.CardNum;
     }
