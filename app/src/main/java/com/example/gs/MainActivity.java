@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
+                Intent intent = new Intent(getApplicationContext(),QrActivity.class);
                 startActivity(intent);
             }
         });
@@ -233,15 +233,15 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
             marker.setTag(gsbin);
             marker.setPosition(new LatLng(gsbin.lat, gsbin.lng));
             if (30000 <= (gsbin.capacity)) {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
-                marker.setWidth(100);
-                marker.setHeight(100);
+                marker.setIcon(OverlayImage.fromResource(R.drawable.greengs));
+                marker.setWidth(150);
+                marker.setHeight(150);
             } else if (15000 <= (gsbin.capacity)) {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
-                marker.setWidth(100);
-                marker.setHeight(100);
+                marker.setIcon(OverlayImage.fromResource(R.drawable.yellowgs));
+                marker.setWidth(150);
+                marker.setHeight(150);
             } else {
-                marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
+                marker.setIcon(OverlayImage.fromResource(R.drawable.redgs));
             }
             marker.setAnchor(new PointF(0.5f, 1.0f));
             marker.setMap(naverMap);

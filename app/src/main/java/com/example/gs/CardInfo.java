@@ -10,9 +10,6 @@ public class CardInfo {
     private Number GsPay;
     private String uid;
 
-
-
-
     public CardInfo(String CardNum, String MmYy, String CardPass, String BirDate, Number GsPay, String uid){
         this.CardNum = CardNum;
         this.MmYy = MmYy;
