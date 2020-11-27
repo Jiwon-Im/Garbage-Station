@@ -1,10 +1,7 @@
 
 package com.example.gs;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,17 +34,17 @@ public class QrActivity extends AppCompatActivity {
     public static final int SEND_INFORMATION = 0;
     public static final int SEND_STOP = 1;
     private double num = -1;
-    //private int num = -1;
-    int weight;
-    double flag;
-    static int w;
-    static double getcapacity;
-    String read;
-    String key;
+    private int num2 = -1;
 
+    int socketWeight;
+    double flag;
+    int flag2;
+
+    double receivedWieght;
+
+    String read;
 
     private Button paymentBtn;
-    private Button cancelBtn;
 
     private Socket socket;
 
@@ -58,16 +54,16 @@ public class QrActivity extends AppCompatActivity {
     private List<GsBin> gsBins = new ArrayList<>();
 
     private String qrurl;
-    private String ip = "192.168.222.1";
-    // private String ip = "10.0.2.2";
-    // private String ip = "192.168.237.1";
-    // private String ip = "192.168.1.1";
+    //private String ip = "192.168.1.5";  //samsung
+    // private String ip = "10.0.2.2";  //pixel
+     private String ip = "192.168.222.1";  //hj
+    // private String ip = "192.168.1.1";   //nr
 
-
+    checkedBin chBin1 = new checkedBin();
     ConnectThread th;
     TextView msgTV, trashbinid;
 
-    private int port = 9989;
+    private int port = 9988;
 
     @Override
     protected void onStop() {
@@ -90,51 +86,51 @@ public class QrActivity extends AppCompatActivity {
         qrurl = "http://m.site.naver.com/0HELu";
 
 
-        //파이어베이스 데이터베이스//getkey(0,1,2)
-        firebaseDatabase = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-        databaseReference = firebaseDatabase.getReference("gsbin"); //DB 테이블 연결
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                gsBins.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    key = snapshot.getKey();
-                    Log.d("flag key", key);
-                    GsBin gsBin = snapshot.getValue(GsBin.class); //만들어둔 GsBin 객체에 데이터 담기
-
-                    gsBins.add(gsBin);
-                    getcapacity = findGs(gsBins, key);
-
-                    Log.d("flag 안에서 적재량 출력", String.valueOf(getcapacity));//적재량
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //디비 가져오던 중 에러 발생
-            }
-        });
-
-        //   Log.d("flag 밖 key", String.valueOf(key));//적재량
-
-
         msgTV = (TextView) findViewById(R.id.gv);
         trashbinid = (TextView) findViewById(R.id.idvalue);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
         final Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
+
                 switch (msg.what) {
                     case SEND_INFORMATION:
-                        //textView.setText(Integer.toString(msg.arg1) + msg.obj);
 
-                        w=msg.arg1;
-                        Log.d("flag 내부 ww", String.valueOf(w));               //쓰레기무게
+                        receivedWieght = msg.arg1;
+                        Log.d("flag 내부 ww", String.valueOf(receivedWieght));               //쓰레기무게
+
+                        firebaseDatabase = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+                        databaseReference = firebaseDatabase.getReference("gsbin"); //DB 테이블 연결
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                                gsBins.clear();
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    GsBin gsBin = snapshot.getValue(GsBin.class); //만들어둔 GsBin 객체에 데이터 담기
+                                    gsBins.add(gsBin);
+
+                                }
+                                chBin1 = findGs(gsBins);
+                                Log.d("flag 계산전 적재량 출력", String.valueOf(chBin1.capacity));//적재량
+                                Log.d("flag 계산전 id 출력", String.valueOf(chBin1.key));//적재량
+                                chBin1 = CalculGs(chBin1, receivedWieght);
+
+                                Log.d("flag 계산후 적재량 출력", String.valueOf(chBin1.capacity));//적재량
+                                Log.d("flag 계산후 id 출력", String.valueOf(chBin1.key));//적재량
+                                databaseReference.child(chBin1.key).child("capacity").setValue(chBin1.capacity);
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                //디비 가져오던 중 에러 발생
+                            }
+                        });
 
                         break;
                     case SEND_STOP:
@@ -147,15 +143,12 @@ public class QrActivity extends AppCompatActivity {
             }
         };
 
+
         //쓰레드 시작
         th = new ConnectThread(handler);
 
         th.start();
 
-        Log.d("flag 이거떠야함 w", String.valueOf(w));               //쓰레기무게
-        Log.d("flag getcapacity", String.valueOf(getcapacity));
-
-        trashbinid.setText(String.valueOf((int) getcapacity));
 
         //버튼->화면전환
         paymentBtn = (Button) findViewById(R.id.button1);
@@ -166,34 +159,36 @@ public class QrActivity extends AppCompatActivity {
                 startActivity(intent);//화면전환
             }
         });
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent2 = new Intent(QrActivity.this, ScannerActivity.class);
-                startActivity(intent2);//화면전환
-            }
-        });
+
 
     }
 
     //쓰레기통 QR코드 값으로 Gsbin 정보 얻기 ID
-    private double findGs(List<GsBin> gsBins, String key) {
+    private checkedBin findGs(List<GsBin> gsBins) {
+        checkedBin chBin2 = new checkedBin();
         if (num < 0) {
             for (GsBin gsbin : this.gsBins) {
                 if (qrurl.equalsIgnoreCase(gsbin.url)) {
-                    //Log.d("flag ", );
-
+                    num2 = gsbin.getGsId();
                     num = gsbin.getGsCapacity();
                     break;
                 }
             }
             if (num > 0) {
                 flag = num;             //현재 쓰레기통 적재량 찾았음.!
-                //trashbinid.setText(String.valueOf(flag - 5000));
-
+                flag2 = num2;
             }
         }
-        Log.d("flag 안에ㅔㅔㅔㅔㅔㅔㅔㅔㅔ", String.valueOf(flag));
-        return flag;//checkedBin;
+
+        chBin2.capacity = flag;
+        chBin2.key = String.valueOf(flag2);
+        return chBin2;
+    }
+
+    private checkedBin CalculGs(checkedBin checkBin, double weight) {
+        checkBin.capacity = checkBin.capacity - weight;
+
+        return checkBin;
     }
 
     //쓰레드
@@ -223,14 +218,14 @@ public class QrActivity extends AppCompatActivity {
 
                 read = input.readLine();
 
-                weight = Integer.parseInt(read);
-                Log.d("flag 웨이틍ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", String.valueOf(weight));
+                socketWeight = Integer.parseInt(read);
+                Log.d("flag 웨이틍ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", String.valueOf(socketWeight));
 
                 //소켓으로 받은 무게값 oncreate 핸들러로 전달
                 Message message = mHandler.obtainMessage();
                 message.what = SEND_INFORMATION;
-                message.arg1 = weight;
-                message.obj = weight;
+                message.arg1 = socketWeight;
+                message.obj = socketWeight;
 
                 mHandler.sendMessage(message);
 
@@ -260,28 +255,15 @@ public class QrActivity extends AppCompatActivity {
 
         public void run() {
             msgTV.setText(null);
-            // Log.d("RRRRRRRNNNNNNNN", String.valueOf(getcapacity));
 
             msgTV.setText(msgTV.getText().toString() + msg + "    g" + "\n" + (2 * Integer.parseInt(msg)) + "   원");
 
         }
     }
+
+    class checkedBin {
+        public double capacity;
+        public String key;
+    }
 }
-/* class msgUpdate2 implements Runnable {
-        private String msg;
-
-        public msgUpdate2(String str) {
-            this.msg = str;
-        }
-
-        public void run() {
-            msgTV.setText(null);
-            Log.d("RRRRRRRNNNNNNNN", String.valueOf(getcapacity));
-
-            msgTV.setText(msgTV.getText().toString() + msg + "    g" + "\n" + (2 * Integer.parseInt(msg)) + "   원");
-
-        }
-
-    }*/
-
 
