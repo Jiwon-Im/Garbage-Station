@@ -6,37 +6,33 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="60dp"
         android:background="@color/colorDark"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/signUpTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/menuImg"
-            android:layout_width="23dp"
-            android:layout_height="21dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/menu" />
 
         <TextView
             android:id="@+id/topBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="120dp"
-            android:text="카드등록"
+            android:text="결제 카드 등록"
             android:textColor="@color/colorWhite"
             android:textSize="25dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
@@ -147,13 +143,12 @@
 
     <Button
         android:id="@+id/CardRegister_button"
-
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="60dp"
-        android:background="@color/colorLight"
+        android:background="@drawable/qr_btn"
         android:text="등록하기"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
