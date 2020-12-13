@@ -263,7 +263,7 @@ public class QrActivity extends AppCompatActivity {
             moneyTextView.setText(null);
 
             gramTextView.setText(msg + " g");
-            moneyTextView.setText(2 * Integer.parseInt(msg) + " 원");
+            moneyTextView.setText(Math.round(5.0+0.2 * Integer.parseInt(msg)) + " 원");
         }
     }
 

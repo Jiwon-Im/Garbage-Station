@@ -46,7 +46,7 @@ public class ResultActivity extends AppCompatActivity {
         idinfoTextView = findViewById(R.id.GSIdInfo);
 
         weightTextView.setText(results.get(0));
-        payTextView.setText(String.valueOf((int)Double.parseDouble(results.get(1))));
+        payTextView.setText(String.valueOf(5+(int)Double.parseDouble(results.get(1))));
         idinfoTextView.setText("GSID #" + results.get(2));
         pointTextView.setText(results.get(3));
 
