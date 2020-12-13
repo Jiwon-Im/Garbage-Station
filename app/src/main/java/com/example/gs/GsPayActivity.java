@@ -25,7 +25,6 @@ public class GsPayActivity extends AppCompatActivity {
     private TextView payview;
     private Button add;
     private Button card;
-    final Number GsPay = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class GsPayActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final String current = user.getUid();
-        final Number GsPay;
 
         db.collection("users").whereEqualTo("uid", current)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
