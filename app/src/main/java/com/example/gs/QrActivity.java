@@ -61,7 +61,7 @@ public class QrActivity extends AppCompatActivity {
     private Button paymentBtn;
 
     private String qrurl;
-    private int port = 9997;
+    private int port = 9999;
     private String ip = "192.168.1.5";  //samsung
     // private String ip = "10.0.2.2";  //pixel
     // private String ip = "192.168.222.1";  //hj
@@ -268,8 +268,8 @@ public class QrActivity extends AppCompatActivity {
             gramTextView.setText(null);             //초기화
             moneyTextView.setText(null);
 
-            gramTextView.setText(msg + "  g");
-            moneyTextView.setText(2 * Integer.parseInt(msg) + "  원");
+            gramTextView.setText(msg + " g");
+            moneyTextView.setText(2 * Integer.parseInt(msg) + " 원");
         }
     }
 
