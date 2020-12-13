@@ -2,6 +2,7 @@ package com.example.gs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,7 +43,8 @@ public class ResultActivity extends AppCompatActivity {
         idinfoTextView = findViewById(R.id.GSIdInfo);
 
         weightTextView.setText(results.get(0));
-        payTextView.setText(results.get(1));
+        //Log.d("flagg", String.valueOf((int)Double.parseDouble(results.get(1))));
+        payTextView.setText( String.valueOf((int)Double.parseDouble(results.get(1))));
         idinfoTextView.setText("#0000" + results.get(2));
         pointTextView.setText(results.get(3));
 
