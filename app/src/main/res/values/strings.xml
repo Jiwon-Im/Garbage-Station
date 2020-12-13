@@ -10,4 +10,7 @@
     <string name="finish">____원 결제하기</string>
     <string name="cancel">결제 취소</string>
 
+    <string name="info_content_1">1. 현 위치에서 가장 가까운 GS의\n 위치를 확인하세요</string>
+    <string name="info_content_2">2. GS에 부착된 QR코드를 찍은 후\n 쓰레기를 투입하세요</string>
+    <string name="info_content_3">3. 투입된 쓰레기양과 결제금액을 확인하고\n 이용 완료를 누르면 GS 이용완료!</string>
 </resources>

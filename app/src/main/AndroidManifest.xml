@@ -30,6 +30,7 @@
         <activity android:name=".CaptureFormActivity" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".QrActivity" />
+        <activity android:name=".InfoActivity"/>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".CardRegisterActivity"></activity>
         <activity
