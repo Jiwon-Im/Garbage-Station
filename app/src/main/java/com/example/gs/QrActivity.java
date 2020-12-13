@@ -118,7 +118,7 @@ public class QrActivity extends AppCompatActivity {
 
                                 //intent 정보
                                 results.add(String.valueOf(receivedWieght));              //측정무게      - results(0)
-                                results.add(String.valueOf(2 * receivedWieght));          //이용 요금     - results(1)
+                                results.add(String.valueOf(0.2 * receivedWieght));          //이용 요금     - results(1)
                                 results.add(String.valueOf(chBin1.key));                  //gsbin number - results(2)
                             }
 
@@ -141,7 +141,7 @@ public class QrActivity extends AppCompatActivity {
                                     CardInfo cardInfo = new CardInfo((String) ds.getData().get("cardNum"), (String) ds.getData().get("mmYy"), (String) ds.getData().get("cardPass"), (String) ds.getData().get("birDate"), (Number) ds.getData().get("gsPay"), current);
 
                                     String value = cardInfo.getGsPay().toString();
-                                    Double minus = 2 * receivedWieght;
+                                    Double minus = 5.0 + 2 * receivedWieght;
 
                                     int payResult = Integer.parseInt(value) - Integer.parseInt(String.valueOf(Math.round(minus)));
 
