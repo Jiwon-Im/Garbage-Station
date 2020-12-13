@@ -1,12 +1,15 @@
-package com.example.gs;
+package com.example.gs.qr;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gs.R;
+import com.example.gs.home.MainActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,8 +40,8 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         results = (ArrayList<String>) intent.getExtras().getSerializable("results");
 
-        weightTextView = findViewById(R.id.gv);
-        payTextView = findViewById(R.id.wv);
+        weightTextView = findViewById(R.id.gValue);
+        payTextView = findViewById(R.id.payValue);
         pointTextView = findViewById(R.id.pointValue);
         idinfoTextView = findViewById(R.id.GSIdInfo);
 

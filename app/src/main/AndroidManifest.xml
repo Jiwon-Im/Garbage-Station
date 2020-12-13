@@ -19,26 +19,26 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".CaptureFormActivity" />
-        <activity android:name=".ScannerActivity" />
-        <activity android:name=".QrActivity" />
-        <activity android:name=".InfoActivity"/>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".CardRegisterActivity"></activity>
+        <activity android:name=".login.SignUpActivity"/>
+        <activity android:name=".qr.CaptureFormActivity" />
+        <activity android:name=".qr.ScannerActivity" />
+        <activity android:name=".qr.QrActivity" />
+        <activity android:name=".home.InfoActivity"/>
+        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.CardRegisterActivity"></activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-        <activity android:name=".ResultActivity"></activity>
-        <activity android:name=".GsPayActivity"></activity>
+        <activity android:name=".qr.ResultActivity"></activity>
+        <activity android:name=".home.GsPayActivity"></activity>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gs.R;
 
 public class InfoActivity extends AppCompatActivity {
 

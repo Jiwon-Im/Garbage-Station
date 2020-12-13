@@ -13,7 +13,6 @@
         android:layout_marginBottom="60dp"
         android:background="@color/colorDark"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/signUpTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,9 +22,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="결제 카드 등록"
+            android:text="@string/card"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,131 +35,128 @@
 
 
     <TextView
-        android:id="@+id/textVCardnum"
+        android:id="@+id/cardNumText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="84dp"
-        android:text="카드번호"
-        android:textSize="15dp"
+        android:text="@string/card_num"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/Card_Num"
+        android:id="@+id/cardNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="1234 1234 1234 1234"
+        android:hint="@string/card_hint_num"
         android:inputType="text"
-
-        app:layout_constraintStart_toStartOf="@+id/textVCardnum"
-        app:layout_constraintTop_toBottomOf="@+id/textVCardnum"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="@+id/cardNumText"
+        app:layout_constraintTop_toBottomOf="@+id/cardNumText"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="@string/card_hint_num" />
 
     <TextView
-        android:id="@+id/textVmmyy"
+        android:id="@+id/mmyyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유효기간"
-        android:textSize="15dp"
+        android:text="@string/card_date"
+        android:textSize="15sp"
         android:textStyle="bold"
-
-        app:layout_constraintBottom_toTopOf="@+id/Card_Num"
-        app:layout_constraintStart_toStartOf="@+id/Mm_Yy"
+        app:layout_constraintBottom_toTopOf="@+id/cardNum"
+        app:layout_constraintStart_toStartOf="@+id/mmyy"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/Mm_Yy"
+        android:id="@+id/mmyy"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="18dp"
         android:ems="10"
-        android:hint="MM/YY"
+        android:hint="@string/card_hint_date"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/Card_Num"
+        app:layout_constraintBottom_toBottomOf="@+id/cardNum"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Card_Num"
-        app:layout_constraintTop_toBottomOf="@+id/textVmmyy"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toEndOf="@+id/cardNum"
+        app:layout_constraintTop_toBottomOf="@+id/mmyyText"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="@string/card_hint_date" />
 
     <TextView
-        android:id="@+id/textVBirdat"
+        android:id="@+id/birthText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="생년월일"
-        android:textSize="15dp"
+        android:text="@string/card_birth"
+        android:textSize="15sp"
         android:textStyle="bold"
-
-        app:layout_constraintBottom_toTopOf="@+id/Card_Pass"
-        app:layout_constraintStart_toStartOf="@+id/Bir_Date"
+        app:layout_constraintBottom_toTopOf="@+id/cardPw"
+        app:layout_constraintStart_toStartOf="@+id/birth"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/Bir_Date"
+        android:id="@+id/birth"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="2018.03.01"
+        android:hint="@string/card_hint_birth"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/Card_Pass"
+        app:layout_constraintBottom_toBottomOf="@+id/cardPw"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Card_Pass"
-        app:layout_constraintTop_toBottomOf="@+id/textVBirdat"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toEndOf="@+id/cardPw"
+        app:layout_constraintTop_toBottomOf="@+id/birthText"
+        tools:ignore="MissingConstraints,TextFields"
+        android:autofillHints="@string/card_hint_birth" />
 
     <TextView
-        android:id="@+id/textVCardPass"
+        android:id="@+id/cardPwText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="24dp"
-        android:text="비밀번호"
-        android:textSize="15dp"
+        android:text="@string/card_pw"
+        android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/Card_Pass"
-        app:layout_constraintTop_toBottomOf="@+id/Card_Num"
+        app:layout_constraintStart_toStartOf="@+id/cardPw"
+        app:layout_constraintTop_toBottomOf="@+id/cardNum"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/Card_Pass"
+        android:id="@+id/cardPw"
         android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="14dp"
         android:ems="10"
-        android:hint="앞 두자리"
+        android:hint="@string/card_hint_pw"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/Bir_Date"
+        app:layout_constraintEnd_toStartOf="@+id/birth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textVCardPass"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintTop_toBottomOf="@+id/cardPwText"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="@string/card_hint_pw" />
 
     <Button
-        android:id="@+id/CardRegister_button"
+        android:id="@+id/cardBtn"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/qr_btn"
-        android:text="등록하기"
+        android:text="@string/card_btn"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Bir_Date"
+        app:layout_constraintTop_toBottomOf="@+id/birth"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

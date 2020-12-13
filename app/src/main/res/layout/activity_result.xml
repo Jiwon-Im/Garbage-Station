@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/result_backgroud"
-    tools:context=".ResultActivity">
+    tools:context=".qr.ResultActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -14,7 +14,6 @@
         android:layout_marginBottom="60dp"
         android:background="@color/colorDark"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/signUpTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="GS 이용내역"
+            android:text="@string/result"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +59,7 @@
                 android:id="@+id/weightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="측정 무게"
+                android:text="@string/result_gram"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +70,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/gv"
+                android:id="@+id/gValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gvalue"
@@ -79,31 +78,32 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintHorizontal_bias="0.75"
                 app:layout_constraintStart_toEndOf="@id/weightText"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/g"
+                android:id="@+id/gText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/g"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/won"
+                app:layout_constraintBottom_toTopOf="@+id/wonPayText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/gv"
+                app:layout_constraintStart_toEndOf="@+id/gValue"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
 
             <TextView
                 android:id="@+id/payText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="이용 요금"
+                android:text="@string/result_pay"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/weightText" />
 
             <TextView
-                android:id="@+id/wv"
+                android:id="@+id/payValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -120,29 +120,29 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintHorizontal_bias="0.735"
                 app:layout_constraintStart_toEndOf="@+id/payText"
-                app:layout_constraintTop_toBottomOf="@+id/gv" />
+                app:layout_constraintTop_toBottomOf="@+id/gValue" />
 
             <TextView
-                android:id="@+id/won"
+                android:id="@+id/wonPayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginRight="20dp"
-                android:text="원"
+                android:layout_marginEnd="10dp"
+                android:text="@string/won"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/wv"
-                app:layout_constraintTop_toBottomOf="@+id/g" />
+                app:layout_constraintStart_toEndOf="@+id/payValue"
+                app:layout_constraintTop_toBottomOf="@+id/gText" />
 
             <TextView
                 android:id="@+id/PointText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="GS 포인트"
+                android:text="@string/result_point"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -159,22 +159,22 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintHorizontal_bias="0.72"
                 app:layout_constraintStart_toEndOf="@+id/PointText"
-                app:layout_constraintTop_toBottomOf="@+id/wv" />
+                app:layout_constraintTop_toBottomOf="@+id/payValue" />
 
             <TextView
-                android:id="@+id/point"
+                android:id="@+id/wonPointText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginRight="20dp"
-                android:text="원"
+                android:layout_marginEnd="10dp"
+                android:text="@string/won"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/pointValue"
-                app:layout_constraintTop_toBottomOf="@+id/won" />
+                app:layout_constraintTop_toBottomOf="@+id/wonPayText" />
 
             <View
                 android:id="@+id/line"
@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="이용 일자"
+                android:text="@string/result_date"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.083"
@@ -203,9 +203,9 @@
                 android:id="@+id/dateValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="2020년 11월 20일"
+                tools:text="2020년 11월 20일"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/dateText"
@@ -216,7 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="이용 시간"
+                android:text="@string/result_time"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.083"
@@ -227,15 +227,14 @@
                 android:id="@+id/timeValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginRight="20dp"
-                android:text="오후 1시 10분"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@id/dateText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateValue" />
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toEndOf="@id/timeText"
+                app:layout_constraintTop_toBottomOf="@+id/dateValue"
+                tools:text="PM 6시 40분" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -245,7 +244,8 @@
             android:layout_height="150dp"
             android:layout_marginTop="100dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/trash3" />
+            app:srcCompat="@drawable/trash"
+            android:contentDescription="@string/result_img" />
 
         <TextView
             android:id="@+id/GSIdInfo"
@@ -253,7 +253,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="255dp"
             android:layout_gravity="center_horizontal"
-            android:text="GS #1"
+            tools:text="GS #1"
             android:textColor="@color/colorMain"
             android:textSize="20sp" />
 
@@ -264,9 +264,9 @@
             android:layout_marginTop="650dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/qr_btn"
-            android:text="확인"
+            android:text="@string/result_btn"
             android:textColor="@color/colorWhite"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </FrameLayout>

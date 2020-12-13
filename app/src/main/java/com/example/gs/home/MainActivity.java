@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.home;
 
 import android.Manifest;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,6 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.gs.login.LoginActivity;
+import com.example.gs.R;
+import com.example.gs.qr.ScannerActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,20 +54,21 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
     };
 
     private Context mContext;
-    private ViewGroup mParent;
 
+    //네이버 맵 연결 관련 변수
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
 
+    //메뉴 연결 관련 변수
     private ListView listView;
     private ListViewAdapter menuAdapter;
 
-    //마커 관련
+    //마커 관련 변수
     private InfoWindow infoWindow;
     private List<GsBin> gsBins = new ArrayList<>();
     private List<Marker> markerList = new ArrayList<>();
-    private boolean isCameraAnimated = false;
 
+    //데이터베이스 관련 변수
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
@@ -101,17 +104,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
             }
         });
 
-        //QR화면 연결
-        Button qrBtn = (Button) findViewById(R.id.qrBtn);
-        qrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //로그아웃
+        //로그아웃 연결
         ImageButton mBtn = (ImageButton) findViewById(R.id.menuImg);
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +120,16 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
             }
         });
 
+        //QR화면 연결
+        Button qrBtn = (Button) findViewById(R.id.qrBtn);
+        qrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ScannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //리스트뷰 연결, 메뉴 등록
         listView = (ListView) findViewById(R.id.listView);
         //리스트뷰 관련
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         arrayMenu.add("마이페이지");
         arrayMenu.add("이용안내");
 
-        //리스트뷰 어댑터 연결
+        //리스트뷰 내 메뉴 선택시 화면 연결
         menuAdapter = new ListViewAdapter(mContext, arrayMenu);
         listView.setAdapter(menuAdapter);
 
@@ -168,15 +171,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         mapFragment.getMapAsync(this);
 
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-
-
     }
-    /*private void startSignUpActivity()
-    {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }*/
-
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -185,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         naverMap.setOnMapClickListener((NaverMap.OnMapClickListener) this);
 
-        //마커 정보창
+        //마커 정보창 설정
         infoWindow = new InfoWindow();
         infoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
             @NonNull
@@ -228,12 +223,15 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         }
     }
 
+    //마커 업데이트 함수
     private void updateMapMarkers(List<GsBin> gsBins) {
         resetMarkerList();
         for (GsBin gsbin : this.gsBins) {
             Marker marker = new Marker();
             marker.setTag(gsbin);
             marker.setPosition(new LatLng(gsbin.lat, gsbin.lng));
+
+            //gsbin가용량 별 이미지 다르게 설정
             if (30000 <= (gsbin.capacity)) {
                 marker.setIcon(OverlayImage.fromResource(R.drawable.greengs));
                 marker.setWidth(150);
@@ -275,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
         return false;
     }
 
+    //마커 리셋 함수
     private void resetMarkerList() {
         if (markerList != null && markerList.size() > 0) {
             for (Marker marker : markerList) {
@@ -282,38 +281,5 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
             }
             markerList.clear();
         }
-    }
-
-//    private void init() {
-//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        if (firebaseUser == null) {
-//            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//            startActivity(intent);
-//        } else {
-//            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(firebaseUser.getUid());
-//            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                    if (task.isSuccessful()) {
-//                        DocumentSnapshot document = task.getResult();
-//                        if (document != null) {
-//                            if (document.exists()) {
-//                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-//                            } else {
-//                                Log.d(TAG, "No such document");
-//                                myStartActivity(CardRegisterActivity.class);
-//                            }
-//                        }
-//                    } else {
-//                        Log.d(TAG, "get failed with ", task.getException());
-//                    }
-//                }
-//            });
-//        }
-//    }
-
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        startActivityForResult(intent, 1);
     }
 }

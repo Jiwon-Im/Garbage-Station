@@ -1,8 +1,7 @@
-package com.example.gs;
+package com.example.gs.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gs.R;
+import com.example.gs.home.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,8 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     Button mLoginBtn;
-    TextView mResigettxt;
-    EditText mEmailText, mPasswordText;
+    TextView mRegisTextView;
+    EditText mEmailTextView, mPasswordTextView;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -34,19 +35,19 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth =  FirebaseAuth.getInstance();
 
         //버튼 등록하기
-        mResigettxt = findViewById(R.id.logregbutton);
-        mLoginBtn = findViewById(R.id.login_button);
-        mEmailText = findViewById(R.id.login_email);
-        mPasswordText = findViewById(R.id.login_password);
+        mRegisTextView = findViewById(R.id.goRegister);
+        mLoginBtn = findViewById(R.id.loginButton);
+        mEmailTextView = findViewById(R.id.loginEmail);
+        mPasswordTextView = findViewById(R.id.loginPassword);
 
 
         //가입 버튼이 눌리면
-        mResigettxt.setOnClickListener(new View.OnClickListener(){
+        mRegisTextView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 //intent함수를 통해 register액티비티 함수를 호출한다.
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
 
             }
         });
@@ -57,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = mEmailText.getText().toString();
-                String pwd = mPasswordText.getText().toString();
+                String email = mEmailTextView.getText().toString();
+                String pwd = mPasswordTextView.getText().toString();
 
                 firebaseAuth.signInWithEmailAndPassword(email,pwd)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {

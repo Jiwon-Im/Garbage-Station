@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gs.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CardRegisterActivity extends AppCompatActivity {
@@ -31,14 +27,14 @@ public class CardRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_register);
 
-        findViewById(R.id.CardRegister_button).setOnClickListener(onClickListener);
+        findViewById(R.id.cardBtn).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.CardRegister_button:
+                case R.id.cardBtn:
                     cardRegister();
                     break;
             }
@@ -46,20 +42,20 @@ public class CardRegisterActivity extends AppCompatActivity {
     };
 
     private void cardRegister() {
-        final String CardNum = ((EditText) findViewById(R.id.Card_Num)).getText().toString();
-        final String MmYy = ((EditText) findViewById(R.id.Mm_Yy)).getText().toString();
-        final String CardPass = ((EditText) findViewById(R.id.Card_Pass)).getText().toString();
-        final String BirDate = ((EditText) findViewById(R.id.Bir_Date)).getText().toString();
-        final Number GsPay = 10000;
-        final String UId;
+        final String cardNum = ((EditText) findViewById(R.id.cardNum)).getText().toString();
+        final String mmYy = ((EditText) findViewById(R.id.mmyy)).getText().toString();
+        final String cardPass = ((EditText) findViewById(R.id.cardPw)).getText().toString();
+        final String birDate = ((EditText) findViewById(R.id.birth)).getText().toString();
+        final Number gsPay = 10000;
+        final String uId;
 
-        if (CardNum.length() > 15 && MmYy.length() > 3 && CardPass.length() > 1 && BirDate.length() > 7) {
+        if (cardNum.length() > 15 && mmYy.length() > 3 && cardPass.length() > 1 && birDate.length() > 7) {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            UId=user.getUid();
-            CardInfo cardInfo = new CardInfo(CardNum, MmYy, CardPass, BirDate, GsPay,UId);
+            uId=user.getUid();
+            CardInfo cardInfo = new CardInfo(cardNum, mmYy, cardPass, birDate, gsPay,uId);
 
             if (user != null) {
                 db.collection("users").document(user.getUid()).set(cardInfo)

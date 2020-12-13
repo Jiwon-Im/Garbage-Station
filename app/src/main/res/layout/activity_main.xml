@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:gravity="bottom"
     app:umanoDragView="@id/dragView"
-    app:umanoPanelHeight="50dp"
     app:umanoOverlay="true"
-    app:umanoShadowHeight="0dp">
+    app:umanoPanelHeight="50dp"
+    app:umanoShadowHeight="0dp"
+    tools:context=".home.MainActivity">
     <!-- gravity 를 bottom으로 하면 아래에서 위로 드래그, top으로 하면 위에서 아래로 드래그 할 수 있다.
          umanoDragView 드래그 해서 보여줄 view를 선택
          umanoScrollableView  슬라이딩 패널에 내용물이 패널에 표시되는것보다 많을 때 스크롤 해서 보여줄 view 부분
@@ -39,41 +38,42 @@
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="255dp"
-                android:layout_marginLeft="353dp"/>
-
+                android:layout_marginStart="353dp"
+                android:layout_marginTop="255dp" />
         </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             android:background="@color/colorDark"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/menuImg"
-                android:layout_width="26dp"
+                android:layout_width="76dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/logout" />
+                android:src="@drawable/logout"
+                android:contentDescription="@string/logout" />
+
             <TextView
                 android:id="@+id/topBarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="75dp"
-                android:text="가까운 GS 찾기"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhite"/>
-        </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="9dp"
+                android:text="@string/main"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
 
         <Button
             android:id="@+id/qrBtn"
@@ -81,10 +81,10 @@
             android:layout_height="50dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/qr_btn"
-            android:text="QR 스캔"
-            android:textSize="25dp"
-            android:textStyle="bold"
+            android:text="@string/qrscan"
             android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.585"
@@ -95,32 +95,33 @@
 
     <LinearLayout
         android:id="@+id/dragView"
-        android:background="@drawable/drawer"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="35dp">
+        android:layout_marginStart="35dp"
+        android:background="@drawable/drawer"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:textStyle="bold"
-            android:text="[ GS 이용 ]"
+            android:text="@string/slider"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listView"
-
-            android:background="@drawable/listview_border"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/listview_border"
+            android:divider="#00000000"
             android:paddingTop="25dp"
-            android:paddingBottom="20dp"
-            android:divider="#00000000">
-        </ListView>
+            android:paddingBottom="20dp">
 
+        </ListView>
     </LinearLayout>
+
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

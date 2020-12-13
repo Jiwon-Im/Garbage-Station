@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.home;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

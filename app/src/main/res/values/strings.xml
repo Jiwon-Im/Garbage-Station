@@ -1,16 +1,88 @@
 <resources>
     <string name="app_name">Garbage Station</string>
     <string name="garbage_image1">trash can</string>
+
     <string name="use">GS 이용</string>
 
-    <string name="gvalue"><u>&#160;&#160;&#160;00&#160;&#160;&#160;</u></string>
-    <string name="g">&#160;g&#160;</string>
-    <string name="wonvalue"><u>&#160;&#160;&#160;00&#160;&#160;&#160;</u></string>
-    <string name="won">&#160;&#160;&#160;&#160;&#160;원&#160;&#160;&#160;&#160;&#160;</string>
-    <string name="finish">____원 결제하기</string>
-    <string name="cancel">결제 취소</string>
+    <!--    메인페이지-->
+    <string name="main">가까운 GS 찾기</string>
+    <string name="slider">[ GS 이용 ]</string>
+    <string name="qrscan">QR 스캔</string>
+    <string name="logout">로그아웃</string>
 
+    <!--    이용안내페이지-->
+    <string name="info">GS 이용 안내</string>
     <string name="info_content_1">1. 현 위치에서 가장 가까운 GS의\n 위치를 확인하세요</string>
     <string name="info_content_2">2. GS에 부착된 QR코드를 찍은 후\n 쓰레기를 투입하세요</string>
     <string name="info_content_3">3. 투입된 쓰레기양과 결제금액을 확인하고\n 이용 완료를 누르면 GS 이용완료!</string>
+    <string name="info_img">이용안내 이미지</string>
+    <string name="info_btn">확인</string>
+
+    <!--    qr페이지-->
+    <string name="qr_top_bar">GS 이용</string>
+    <string name="qr_info_msg1">GS에 쓰레기를 버려주세요</string>
+    <string name="qr_info_msg2">투입된 쓰레기는</string>
+    <string name="qr_info_msg3">결제될 것 입니다</string>
+    <string name="qr_btn1">이용 완료</string>
+    <string name="qr_tv4">투입한 쓰레기의 결제금액 확인 후\n하단 이용완료 버튼을 눌러주세요</string>
+    <string name="qr_img">qr 이미지</string>
+
+    <!--    이용내역 확인페이지-->
+    <string name="result">GS 이용내역</string>
+    <string name="result_img">이용내역 이미지</string>
+    <string name="result_gram">측정 무게</string>
+    <string name="result_pay">이용 요금</string>
+    <string name="result_point">GS 포인트</string>
+    <string name="gvalue">00</string>
+    <string name="g">g</string>
+    <string name="wonvalue">00</string>
+    <string name="won">원</string>
+    <string name="result_date">이용 일자</string>
+    <string name="result_time">이용 시간</string>
+    <string name="result_btn">확인</string>
+
+    <!--    gsbin마커포인트 정보창-->
+    <string name="point_img">마커 이미지</string>
+    <string name="point_capacity">현재 이용 가능 적재량</string>
+    <string name="point_info">잠금 해제 비용 5원 + 1g당 0.2원</string>
+
+    <!--    회원가입-->
+    <string name="signup">GS 회원가입</string>
+    <string name="signup_msg">Welcome Garbage-Station!</string>
+    <string name="signup_hint_name">이름</string>
+    <string name="signup_hint_email">이메일</string>
+    <string name="signup_hint_pw">비밀번호</string>
+    <string name="signup_hint_pw_check">비밀번호 확인</string>
+    <string name="signup_btn">가입</string>
+    <string name="signup_ask">이미 GS의 회원이신가요?</string>
+    <string name="signup_login_btn">로그인하기</string>
+
+    <!--    로그인-->
+    <string name="login">GS 로그인</string>
+    <string name="login_email">"GS@gmail.com"</string>
+    <string name="login_password">"Password"</string>
+    <string name="login_title">"Start Garbage-Station!"</string>
+    <string name="login_text_view2">"GS와 함께 올바른 쓰레기 배출에 동참하세요!"</string>
+    <string name="login_button">"로그인"</string>
+    <string name="login_text_view3">"아직 GS의 회원이 아니시라면?"</string>
+    <string name="login_go">"회원가입하기"</string>
+
+
+    <!--    결제 및 GS페이 페이지-->
+    <string name="gs_pay_top_bar">결제 및 GS페이</string>
+    <string name="gs_pay_name">GS Pay</string>
+    <string name="gs_pay_registered_card">등록된 카드</string>
+    <string name="gs_pay_charge">충전하기</string>
+
+    <string name="card">결제 카드 등록</string>
+    <string name="card_num">카드번호</string>
+    <string name="card_hint_num">1234 1234 1234 1234</string>
+    <string name="card_date">유효기간</string>
+    <string name="card_hint_date">MM/YY</string>
+    <string name="card_pw">비밀번호</string>
+    <string name="card_hint_pw">앞 두자리</string>
+    <string name="card_birth">생년월일</string>
+    <string name="card_hint_birth">2018.03.01</string>
+    <string name="card_btn">등록하기</string>
+
 </resources>

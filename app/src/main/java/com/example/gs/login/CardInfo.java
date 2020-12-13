@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.login;
 
 import android.widget.EditText;
 

@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -25,7 +24,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:padding="9dp"
-            android:text="결제 및 GS페이"
+            android:text="@string/gs_pay_top_bar"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -48,20 +47,19 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:paddingBottom="0dp"
-            android:text="GS Pay"
-            android:textSize="15dp"
-
+            android:text="@string/gs_pay_name"
+            android:textSize="15sp"
             android:textColor="@color/colorDark" />
 
         <TextView
-            android:id="@+id/gspayvalue"
+            android:id="@+id/gsPayValue"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="-10dp"
             android:gravity="center"
             android:paddingTop="0dp"
             android:textColor="@color/colorMain"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,14 +70,14 @@
             android:background="@drawable/pay_background">
 
             <Button
-                android:id="@+id/add"
+                android:id="@+id/chargeBtn"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/charge"
-                android:text="충전하기"
+                android:text="@string/gs_pay_charge"
                 android:textColor="#FFFFFF"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,28 +94,25 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-
-
-            android:text="등록된 카드"
+            android:layout_marginStart="15dp"
+            android:text="@string/gs_pay_registered_card"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/card"
+            android:id="@+id/cardBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:gravity="center_vertical|left"
+            android:gravity="center_vertical|start"
             android:background="@color/colorWhite"
-            android:drawableLeft="@drawable/card"
-            android:paddingLeft="5dp"
+            android:drawableStart="@drawable/card"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:drawablePadding="5dp" />
     </LinearLayout>
 </LinearLayout>
-

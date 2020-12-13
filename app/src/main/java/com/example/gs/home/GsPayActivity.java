@@ -1,8 +1,6 @@
-package com.example.gs;
+package com.example.gs.home;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gs.R;
+import com.example.gs.login.CardInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,18 +22,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class GsPayActivity extends AppCompatActivity {
 
-    private TextView payview;
-    private Button add;
-    private Button card;
+    private TextView payTextView;
+    private Button cardBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gspay);
 
-        payview = (TextView) findViewById(R.id.gspayvalue);
-        add = (Button) findViewById(R.id.add);
-        card = (Button) findViewById(R.id.card);
+        payTextView = (TextView) findViewById(R.id.gsPayValue);
+        Button chargeBtn = (Button) findViewById(R.id.chargeBtn);
+        cardBtn = (Button) findViewById(R.id.cardBtn);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,22 +43,21 @@ public class GsPayActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                                     for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()) {
-                                                        CardInfo cardInfo2 = new CardInfo(null, null, null, null, (Number) ds.getData().get("gsPay"), null);
-                                                        payview.setText(cardInfo2.getGsPay().toString());
+                                                        CardInfo cardInfo = new CardInfo(null, null, null, null, (Number) ds.getData().get("gsPay"), null);
+                                                        payTextView.setText(cardInfo.getGsPay().toString());
                                                         String value = ds.getString("cardNum");
                                                         if (value != "") {
-                                                            card.setText(value);
+                                                            cardBtn.setText(value);
                                                         } else {
-                                                            card.setText("failed");
+                                                            cardBtn.setText("failed");
                                                         }
-
                                                         //    break;
                                                     }
                                                 }
                                             }
         );
 
-        add.setOnClickListener(new View.OnClickListener() {
+        chargeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 db.collection("users").whereEqualTo("uid", current)
 
@@ -67,21 +65,21 @@ public class GsPayActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()) {
-                            CardInfo cardInfo2 = new CardInfo((String) ds.getData().get("cardNum"), (String) ds.getData().get("mmYy"), (String) ds.getData().get("cardPass"), (String) ds.getData().get("birDate"), (Number) ds.getData().get("gsPay"), current);
+                            CardInfo cardInfo = new CardInfo((String) ds.getData().get("cardNum"), (String) ds.getData().get("mmYy"), (String) ds.getData().get("cardPass"), (String) ds.getData().get("birDate"), (Number) ds.getData().get("gsPay"), current);
 
-                            String value = cardInfo2.getGsPay().toString();
+                            String value = cardInfo.getGsPay().toString();
                             int plus = 5000;
                             int result = plus + Integer.parseInt(value);
 
-                            cardInfo2.setGsPay(result);
+                            cardInfo.setGsPay(result);
 
-                            payview.setText(Integer.toString(result));
+                            payTextView.setText(Integer.toString(result));
 
-                            db.collection("users").document(current).set(cardInfo2)
+                            db.collection("users").document(current).set(cardInfo)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            startToast("성공");
+                                            startToast("충전되었습니다.");
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {

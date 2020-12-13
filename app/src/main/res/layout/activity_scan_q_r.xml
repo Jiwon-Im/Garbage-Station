@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QrActivity">
+    tools:context=".qr.QrActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -23,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="GS 이용"
+            android:text="@string/qr_top_bar"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,9 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:layout_marginBottom="22dp"
-        android:text="GS에 쓰레기를 버려주세요"
+        android:text="@string/qr_info_msg1"
         android:textColor="@color/colorMain"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/useImg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -56,23 +56,23 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="14dp"
-        android:text="투입된 쓰레기는"
+        android:text="@string/qr_info_msg2"
         android:textColor="@color/colorMain"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/money"
-        app:layout_constraintEnd_toStartOf="@+id/gv"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/moneyValue"
+        app:layout_constraintEnd_toStartOf="@+id/gValue"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/gv"
+        android:id="@+id/gValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="0dp"
         android:gravity="center"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/money"
+        app:layout_constraintBottom_toTopOf="@+id/moneyValue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/infoMsg2"
         app:layout_constraintTop_toBottomOf="@+id/useImg"
@@ -83,15 +83,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="9dp"
-        android:text="결제될 것 입니다"
+        android:text="@string/qr_info_msg3"
         android:textColor="@color/colorMain"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/money"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/moneyValue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/money" />
+        app:layout_constraintStart_toEndOf="@+id/moneyValue" />
 
     <TextView
-        android:id="@+id/money"
+        android:id="@+id/moneyValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
@@ -102,8 +102,8 @@
         app:layout_constraintEnd_toStartOf="@+id/infoMsg3"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gv"
-        tools:text="12345원" />
+        app:layout_constraintTop_toBottomOf="@+id/gValue"
+        tools:text="12345원"/>
 
 
     <Button
@@ -115,24 +115,25 @@
         android:layout_marginBottom="55dp"
         android:background="@drawable/use_button"
         android:gravity="center"
-        android:text="이용 완료"
+        android:text="@string/qr_btn1"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/money" />
+        app:layout_constraintTop_toBottomOf="@+id/moneyValue" />
 
     <ImageView
         android:id="@+id/useImg"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/gv"
+        app:layout_constraintBottom_toTopOf="@+id/gValue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoMsg1"
-        app:srcCompat="@drawable/g_trashbin" />
+        app:srcCompat="@drawable/qr_img_trashbin"
+        android:contentDescription="@string/qr_img" />
 
     <TextView
         android:id="@+id/textView4"
@@ -141,14 +142,14 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/usebackground"
-        android:text="투입한 쓰레기의 결제금액 확인 후\n하단 이용완료 버튼을 눌러주세요"
+        android:text="@string/qr_tv4"
         android:textAlignment="center"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/money"
+        app:layout_constraintTop_toBottomOf="@+id/moneyValue"
         app:layout_constraintVertical_bias="0.478" />
 
 

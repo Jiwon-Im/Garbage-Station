@@ -1,4 +1,4 @@
-package com.example.gs;
+package com.example.gs.qr;
 
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.RequiresApi;
+
+import com.example.gs.R;
 import com.journeyapps.barcodescanner.CaptureActivity;
 
 public class CaptureFormActivity extends CaptureActivity {
@@ -30,37 +32,33 @@ public class CaptureFormActivity extends CaptureActivity {
         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
                 100,260*5);
 
-        /* TextVeiw를 설정하고 마지막엔 this.addContentView ! */
 
+        //TextView를 설정하고 this.addContentView
         TextView textView = new TextView(this);
         textView.setLayoutParams(new LinearLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT));
         textView.setTextColor(Color.parseColor("#ABCDEF"));
-        textView.setText("바코드 / QR 코드 입력화면");
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
 
-
-        /* imagaeVeiw를 설정하고 마지막엔 this.addContentView ! */
-
+        //imageView를 설정하고 this.addContentView
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.MATRIX);
 
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.trashcan));
 
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.trashcan2));
-
-        Display display = getWindowManager().getDefaultDisplay();  // in Activity
+        Display display = getWindowManager().getDefaultDisplay();
 
         Point size = new Point();
-        display.getSize(size); // or getSize(size)
-        float width = (size.x)/2;
-        float height = (size.y)/8;
+        display.getSize(size);
+        float width = (float)(size.x)/2;
+        float height = (float)(size.y)/8;
 
         Matrix matrix=new Matrix();
         matrix.set(imageView.getImageMatrix());
-        matrix.postScale(0.25f,0.25f,(float)((float)width-(float)576*0.09),(float)((float)height-(float)720*0.09));//화면크기 받아와서 조절하기!
+        matrix.postScale(0.25f,0.25f,(float)((float)width-(float)576*0.09),(float)((float)height-(float)720*0.09));//화면크기 받아와서 조절
         imageView.setImageMatrix(matrix);
 
-        /* this.addContentView ! */
 
+        //this.addContentView
         this.addContentView(textView, params);
         this.addContentView(imageView,params);
     }

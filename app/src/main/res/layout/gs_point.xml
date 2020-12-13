@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,12 +18,13 @@
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_margin="25dp"
-            app:srcCompat="@drawable/garbage" />
+            app:srcCompat="@drawable/garbage"
+            android:contentDescription="@string/point_img" />
 
         <LinearLayout
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="25dp"
+            android:layout_marginEnd="25dp"
             android:orientation="vertical">
 
             <TextView
@@ -31,26 +32,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorMain"
-                android:text="GS - L" />
+                tools:text="GS - L" />
+
             <TextView
                 android:id="@+id/gsInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="현재 이용 가능 적재량" />
+                android:text="@string/point_capacity" />
 
             <TextView
                 android:id="@+id/gsAvailable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="20kg" />
+                tools:text="20kg" />
 
         </LinearLayout>
 
@@ -66,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
-            android:text="#1"
+            tools:text="#1"
             android:textColor="@color/colorDark"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
-            android:text="잠금 해제 비용 5원 + 1g당 0.2원"
-            android:textSize="15dp"
+            android:text="@string/point_info"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
