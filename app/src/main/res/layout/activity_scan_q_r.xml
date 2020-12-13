@@ -59,7 +59,7 @@
         android:text="투입된 쓰레기는"
         android:textColor="@color/colorMain"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/idvalue"
+        app:layout_constraintBottom_toTopOf="@+id/money"
         app:layout_constraintEnd_toStartOf="@+id/gv"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,7 +72,7 @@
         android:layout_marginBottom="14dp"
         android:gravity="center"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/idvalue"
+        app:layout_constraintBottom_toTopOf="@+id/money"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/infoMsg2"
         app:layout_constraintTop_toBottomOf="@+id/useImg"
@@ -86,12 +86,12 @@
         android:text="결제될 것 입니다"
         android:textColor="@color/colorMain"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/idvalue"
+        app:layout_constraintBottom_toBottomOf="@+id/money"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/idvalue" />
+        app:layout_constraintStart_toEndOf="@+id/money" />
 
     <TextView
-        android:id="@+id/idvalue"
+        android:id="@+id/money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idvalue" />
+        app:layout_constraintTop_toBottomOf="@+id/money" />
 
     <ImageView
         android:id="@+id/useImg"
@@ -148,7 +148,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idvalue"
+        app:layout_constraintTop_toBottomOf="@+id/money"
         app:layout_constraintVertical_bias="0.478" />
 
 

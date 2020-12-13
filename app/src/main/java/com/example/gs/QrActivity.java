@@ -15,11 +15,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,37 +39,33 @@ public class QrActivity extends AppCompatActivity {
 
     public static final int SEND_INFORMATION = 0;
     public static final int SEND_STOP = 1;
-    private double num = -1;
-    private int num2 = -1;
-
+    private double temp_capacity = -1;
+    private int temp_id = -1;
     int socketWeight;
     double flag;
     int flag2;
-
     double receivedWieght;
 
-    String read;
-
-    private Button paymentBtn;
-
     private Socket socket;
+    String read;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
     private List<GsBin> gsBins = new ArrayList<>();
-
-    private String qrurl;
-    private String ip = "192.168.1.5";  //samsung
-    // private String ip = "10.0.2.2";  //pixel
-    // private String ip = "192.168.222.1";  //hj
-    // private String ip = "192.168.1.1";   //nr
+    ArrayList<String> results = new ArrayList<>();
 
     checkedBin chBin1 = new checkedBin();
     ConnectThread th;
-    TextView msgTV, trashbinid;
+    TextView gramTextView, moneyTextView;
+    private Button paymentBtn;
 
-    private int port = 9994;
+    private String qrurl;
+    private int port = 9997;
+    private String ip = "192.168.1.5";  //samsung
+    // private String ip = "10.0.2.2";  //pixel
+    // private String ip = "192.168.222.1";  //hj
+    // private String ip = "192.168.1.1";    //nr
 
     @Override
     protected void onStop() {
@@ -79,18 +81,15 @@ public class QrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_q_r);
-          Intent intent = getIntent();
-          qrurl = intent.getExtras().getString("code");
+        Intent intent = getIntent();
+        qrurl = intent.getExtras().getString("code");
+        //  qrurl = "http://m.site.naver.com/0HELu";
 
-      //  qrurl = "http://m.site.naver.com/0HELu";
-
-
-        msgTV = (TextView) findViewById(R.id.gv);
-        trashbinid = (TextView) findViewById(R.id.idvalue);
+        gramTextView = (TextView) findViewById(R.id.gv);
+        moneyTextView = (TextView) findViewById(R.id.money);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
 
         final Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -98,31 +97,29 @@ public class QrActivity extends AppCompatActivity {
 
                 switch (msg.what) {
                     case SEND_INFORMATION:
-
+                        //핸들러 값 저장
                         receivedWieght = msg.arg1;
-                        Log.d("flag 내부 ww", String.valueOf(receivedWieght));               //쓰레기무게
 
-                        firebaseDatabase = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
-                        databaseReference = firebaseDatabase.getReference("gsbin"); //DB 테이블 연결
+                        ////DATABASE GSBIN UPDATE
+                        firebaseDatabase = FirebaseDatabase.getInstance();                      //파이어베이스 데이터베이스 연동
+                        databaseReference = firebaseDatabase.getReference("gsbin");       //DB 테이블 연결
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
                                 gsBins.clear();
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     GsBin gsBin = snapshot.getValue(GsBin.class); //만들어둔 GsBin 객체에 데이터 담기
                                     gsBins.add(gsBin);
-
                                 }
                                 chBin1 = findGs(gsBins);
-                                Log.d("flag 계산전 적재량 출력", String.valueOf(chBin1.capacity));//적재량
-                                Log.d("flag 계산전 id 출력", String.valueOf(chBin1.key));//적재량
                                 chBin1 = CalculGs(chBin1, receivedWieght);
 
-                                Log.d("flag 계산후 적재량 출력", String.valueOf(chBin1.capacity));//적재량
-                                Log.d("flag 계산후 id 출력", String.valueOf(chBin1.key));//적재량
                                 databaseReference.child(chBin1.key).child("capacity").setValue(chBin1.capacity);
 
+                                //intent 정보
+                                results.add(String.valueOf(receivedWieght));              //측정무게      - results(0)
+                                results.add(String.valueOf(2 * receivedWieght));          //이용 요금     - results(1)
+                                results.add(String.valueOf(chBin1.key));                  //gsbin number - results(2)
                             }
 
                             @Override
@@ -131,6 +128,32 @@ public class QrActivity extends AppCompatActivity {
                             }
                         });
 
+                        ////DATABASE USER GSPAY UPDATE
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        final String current = user.getUid();
+
+                        db.collection("users").whereEqualTo("uid", current)
+                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (DocumentSnapshot ds : queryDocumentSnapshots.getDocuments()) {
+                                    CardInfo cardInfo = new CardInfo((String) ds.getData().get("cardNum"), (String) ds.getData().get("mmYy"), (String) ds.getData().get("cardPass"), (String) ds.getData().get("birDate"), (Number) ds.getData().get("gsPay"), current);
+
+                                    String value = cardInfo.getGsPay().toString();
+                                    Double minus = 2 * receivedWieght;
+
+                                    int payResult = Integer.parseInt(value) - Integer.parseInt(String.valueOf(Math.round(minus)));
+
+                                    cardInfo.setGsPay(payResult);
+
+                                    //intent 정보
+                                    results.add(String.valueOf(payResult));                 //GSPOINT    - results(3)
+
+                                    db.collection("users").document(current).set(cardInfo);
+                                }
+                            }
+                        });
                         break;
                     case SEND_STOP:
                         th.stopThread();
@@ -142,43 +165,39 @@ public class QrActivity extends AppCompatActivity {
             }
         };
 
-
         //쓰레드 시작
         th = new ConnectThread(handler);
 
         th.start();
 
-
-        //버튼->화면전환
+        //화면전환
         paymentBtn = (Button) findViewById(R.id.button1);
 
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(QrActivity.this, ResultActivity.class);
+                intent.putExtra("results", results);
                 startActivity(intent);//화면전환
             }
         });
-
-
     }
 
-    //쓰레기통 QR코드 값으로 Gsbin 정보 얻기 ID
+    //쓰레기통 QR코드->Gsbin ID 얻기
     private checkedBin findGs(List<GsBin> gsBins) {
         checkedBin chBin2 = new checkedBin();
-        if (num < 0) {
+        if (temp_capacity < 0) {
             for (GsBin gsbin : this.gsBins) {
                 if (qrurl.equalsIgnoreCase(gsbin.url)) {
-                    num2 = gsbin.getGsId();
-                    num = gsbin.getGsCapacity();
+                    temp_id = gsbin.getGsId();
+                    temp_capacity = gsbin.getGsCapacity();
                     break;
                 }
             }
-            if (num > 0) {
-                flag = num;             //현재 쓰레기통 적재량 찾았음.!
-                flag2 = num2;
+            if (temp_capacity > 0) {
+                flag = temp_capacity;             //현재 쓰레기통 적재량 찾았음.!
+                flag2 = temp_id;
             }
         }
-
         chBin2.capacity = flag;
         chBin2.key = String.valueOf(flag2);
         return chBin2;
@@ -196,7 +215,6 @@ public class QrActivity extends AppCompatActivity {
         public static final int SEND_INFORMATION = 0;
         public static final int SEND_STOP = 1;
         boolean stopped = false;
-        int i = 0;
         Handler mHandler;
 
         public ConnectThread(Handler handler) {
@@ -215,25 +233,19 @@ public class QrActivity extends AppCompatActivity {
                 socket = new Socket(serverAddr, port);
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                read = input.readLine();
+                read = input.readLine();                       //소켓 read
+                socketWeight = Integer.parseInt(read);         //read 변환
 
-                socketWeight = Integer.parseInt(read);
-                Log.d("flag 웨이틍ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", String.valueOf(socketWeight));
-
-                //소켓으로 받은 무게값 oncreate 핸들러로 전달
+                //소켓정보 핸들러 전달
                 Message message = mHandler.obtainMessage();
                 message.what = SEND_INFORMATION;
                 message.arg1 = socketWeight;
-                message.obj = socketWeight;
-
                 mHandler.sendMessage(message);
 
                 //UI 전달
-                mHandler.post(new msgUpdate(read));
-
+                mHandler.post(new msgUpdate(String.valueOf(0)));    //0g
                 Thread.sleep(2000);
-
-                mHandler.post(new msgUpdate(read));
+                mHandler.post(new msgUpdate(read));                 //150g
 
                 socket.close();
                 throw new Exception();
@@ -253,10 +265,11 @@ public class QrActivity extends AppCompatActivity {
         }
 
         public void run() {
-            msgTV.setText(null);
+            gramTextView.setText(null);             //초기화
+            moneyTextView.setText(null);
 
-            msgTV.setText(msgTV.getText().toString() + msg + "    g" + "\n" + (2 * Integer.parseInt(msg)) + "   원");
-
+            gramTextView.setText(msg + "  g");
+            moneyTextView.setText(2 * Integer.parseInt(msg) + "  원");
         }
     }
 
@@ -265,4 +278,3 @@ public class QrActivity extends AppCompatActivity {
         public String key;
     }
 }
-
