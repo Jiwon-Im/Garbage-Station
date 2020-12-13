@@ -78,7 +78,7 @@ public class QrActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_q_r);
+        setContentView(R.layout.activity_qr);
         Intent intent = getIntent();
         qrUrl = intent.getExtras().getString("code");
 
