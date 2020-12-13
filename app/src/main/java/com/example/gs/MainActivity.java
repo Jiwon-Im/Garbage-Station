@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements NaverMap.OnMapCli
                         startActivity(intent1);
                         break;
                     case 1:
+                        Intent intent2 = new Intent(getApplicationContext(), InfoActivity.class);
+                        startActivity(intent2);
                         break;
                     default:
                 }
